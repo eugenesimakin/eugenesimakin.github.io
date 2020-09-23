@@ -1,1 +1,1 @@
-My tech notes
+`bundle exec jekyll serve`
