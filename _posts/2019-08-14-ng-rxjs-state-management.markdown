@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Simple RxJS-based State Management in Angular"
+tags: angular rxjs state-management
 ---
 
 
