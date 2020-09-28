@@ -47,10 +47,10 @@ Inside an ng component:
 The _AsyncPipe_ is quite important here. In addition to that, the _OnPush_ change detection strategy could be
 used to improve performance but in my case, when the application is not big or medium size, this is not important.
 And that's pretty much all:
-- We set the initial state in BehaviorSubject's constructor
-- Nobody outside the Store should have access to the BehaviorSubject because it has the write rights
-- Writing to state should be handled by specialized Store methods (ex: addTodo, removeTodo, etc)
-- Create one BehaviorSubject per store entity, for example if you have TodoGroups create a new BehaviorSubject for it, as well as the observable$, and getters/setters
+- We set the initial state in _BehaviorSubject_'s constructor
+- Nobody outside the Store should have access to the _BehaviorSubject_ because it has the write rights
+- Writing to state should be handled by specialized Store methods (ex: _addTodo_, _removeTodo_, etc)
+- Create one _BehaviorSubject_ per store entity, for example if you have TodoGroups create a new _BehaviorSubject_ for it, as well as the _observable$_, and getters/setters
 
 The solution is, indeed, pretty simple and doesn't require additional libraries in Angular. 
 But it has a few drawbacks (or lack of useful features) such as:
