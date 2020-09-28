@@ -1,57 +1,41 @@
-title: Tech Notes
-description: Just some stuff
-author: Some Dude
-github: https://github.com/eugenesimakin
-about: Just a java/js developer
-disqus_shortname: techstuff
-google_analytics: UA-146425616-1
-avatar_url: /static/img/avatar.jpg
+# Site settings
+title:          Tale
+description:    "Just a tech log"
+baseurl:        ""
+url:            "https://eugenesimakin.github.io"
 
-enableTags: true
-tagarray: []
+# Google Analytics
+google_analytics: UA—XXXXXXXX-X
 
-collections:
-  project:
-    output: true
-    permalink: /project/:path/
+# Author
+author:
+  name:         Eugene Simakin
+  # url:          https://chester.how
+  email:        simakin.eugene@gmail.com
 
-social:
-    - icon: fa-facebook
-      link: "https://www.facebook.com/eugenesmk"
-    # - icon: fa-twitter
-      # link: "#"
-    - icon: fa-linkedin
-      link: "https://www.linkedin.com/in/esimakin/"
-    - icon: fa-stack-overflow
-      link: "https://stackoverflow.com/users/1858859/eugenes"
-    - icon: fa-github
-      link: "https://github.com/eugenesimakin"
+# Build settings
+markdown:       kramdown
+include:
+  - _pages
 
-share:
-  twitter_username: github.io
-  fb_appid: 1749788565247320
+# Assets
+sass:
+  sass_dir:     _sass
+  style:        compressed
 
-urls:
-    # - text: About Me
-      # url: /about/
-    # - text: My Projects
-      # url: /projects/
-    - text: XML Feed
-      url: /feed.xml
-
-url: ""
-baseurl: ""
-paginate: 20
-per_page: 20
-paginate_path: "/page/:num/"
-markdown: kramdown
-gems:
+# Gems
+plugins:
+  - jekyll-feed
   - jekyll-paginate
-  - jekyll-gist
+  - jekyll-seo-tag
+  # - jemoji #Uncomment this to allow emoji in your post
 
-compress_html:
-  clippings: all
-  comments: ["<!-- ", " -->"]
-  endings: all
-  ignore:
-    envs: ['development']
+# Permalinks
+permalink:      /:year-:month-:day/:title
+paginate:       5
+
+# Excludes
+exclude: [ Gemfile, Gemfile.lock, tale.gemspec ]
+
+# Disqus (Set to your disqus id)
+disqus:         jekyll-tale

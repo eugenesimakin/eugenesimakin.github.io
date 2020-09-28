@@ -1,8 +1,7 @@
 ---
 layout: post
 title:  "Build Your Own - Writing a Bittorrent Client"
-date:   2020-09-24 00:00:00 +0000
-categories: [bittorrent, kotlin]
+tags: Bittorrent
 ---
 
 While exploring Github, I bumped into an interesting repository which is called 
@@ -63,7 +62,7 @@ to stop working on it for now, because already spent a lot of time on it.
 
 # Next Steps
 
-The first next step is to get the last percent of the file. This might seem easy but it's not because
+The first next step is to get the last percent of the file. This might seem easy, but it's not because
 it requires a lot of work. Secondly, the CPU usage is pretty high but unreasonable. Need to get rid of this. 
 The third step might be to get seeding work.
 

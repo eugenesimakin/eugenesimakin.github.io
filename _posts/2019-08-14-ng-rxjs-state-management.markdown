@@ -1,35 +1,63 @@
 ---
 layout: post
-title:  "RxJS-based State Management in Angular"
-date:   2019-08-14 00:00:00 +0000
-categories: [angular, state-management]
+title:  "Simple RxJS-based State Management in Angular"
 ---
 
-The idea that an app need state management came with the growing popularity of [React + Redux](https://redux.js.org/faq/general#when-should-i-use-redux) solution. Angular has its own _Redux_ which is called [NGRX](https://ngrx.io/docs). In this article I'm going to take a look at the approach described [here](https://dev.to/avatsaev/simple-state-management-in-angular-with-only-services-and-rxjs-41p8) and share my experience using in a small angular application. In addition to that, I'll name benefits and drawbacks of the approach.
 
-Let's review the approach first. The idea behind it is very simple. The [BehaviorSubject](https://github.com/ReactiveX/rxjs/blob/master/doc/subject.md#behaviorsubject) is used as store for the app state. The [Observales](https://github.com/ReactiveX/rxjs/blob/master/doc/observable.md#observable), derived from the _BehaviorSubject_ are used to bind the state to different parts of an app (using the _subscribe_ method or _async_ pipes).
+I got a new project to work on and needed a state management library for that project. Because my team lead
+didn't have experience with modern state management libraries and the project appears to be small (even in perspective),
+I wanted a simple solution. A solution, which would be easy to use and would work nicely with Angular. Google led me to
+[this article](https://dev.to/avatsaev/simple-state-management-in-angular-with-only-services-and-rxjs-41p8) and I decided 
+to use it in the new project.
 
-Going into details... You'll need a store service like this:
-{% gist 51283d3a43f5a510c02c294beb14dc2b %}
+**Warning!** This blog post is not a tutorial and is my experience only. If you're looking for a guide, please, refer to
+"[Simple state management in Angular with only Services and RxJS](https://dev.to/avatsaev/simple-state-management-in-angular-with-only-services-and-rxjs-41p8)"
+article at [dev.to](https://dev.to/).
 
-Here what the author of the [linked article](https://dev.to/avatsaev/simple-state-management-in-angular-with-only-services-and-rxjs-41p8) suggests:
+Let's review the approach first. The idea is pretty simple. You have a state (plain js object) wrapped in 
+[BehaviorSubject](http://reactivex.io/rxjs/manual/overview.html#behaviorsubject).
+Any ng component can be subscribed to the _BehaviorSubject_ in order to get updates of the app's state. 
+To achieve that, we need to convert the _BehaviorSubject_ to _Observable_ and apply rxjs operators to get 
+slices of the state:
+
+{% highlight typescript %}
+class StoreService {
+  private _state = new BehaviorSubject<State>(new State());
+  public state$ = this._state.asObservable(); // might be private
+
+  public partOfState$ = this.state$.pipe(...);
+
+  public changeStateMethod() {
+      this._state.next(...)
+  }
+}
+{% endhighlight %}
+
+Inside an ng component:
+
+{% highlight html %}
+<some-component>
+  <app-todo *ngFor="let todo of todosStore.todos$ | async"
+    [todo]="todo">
+  </app-todo>
+</some-component>
+{% endhighlight %}
+
+The _AsyncPipe_ is quite important here. In addition to that, the _OnPush_ change detection strategy could be
+used to improve performance but in my case, when the application is not big or medium size, this is not important.
+And that's pretty much all:
 - We set the initial state in BehaviorSubject's constructor
 - Nobody outside the Store should have access to the BehaviorSubject because it has the write rights
 - Writing to state should be handled by specialized Store methods (ex: addTodo, removeTodo, etc)
 - Create one BehaviorSubject per store entity, for example if you have TodoGroups create a new BehaviorSubject for it, as well as the observable$, and getters/setters
 
-I agree with the first three points but for the last one I chose the different way to go. Instead of creating one BehaviorSubject per store entity, I'm using `BehaviorSubject<AppState>`, where _AppState_ is a class with immutable fields.
-
-This is an usage example:
-{% gist 18b61974f615e9fa2e08c0ec5851b9da %}
-
-Full source code is available at [github.com/me/ng-todo-app](https://github.com/esimakin/angular7-todo-app).
-
-As you can see it's, indeed, pretty simple and there's no need for additional libraries. But because it's simple this way has a few drawbacks (or lack of useful features) such as:
+The solution is, indeed, pretty simple and doesn't require additional libraries in Angular. 
+But it has a few drawbacks (or lack of useful features) such as:
 * There's no history of the state. The history might be helpful in some cases (not only the undo/redo but the others as well).
-* Assuming you don't want to put the http client into the store service (to make testing easier) you'll have to find another place (I put it into the module's constructor).
+* There's no middleware. For example, I don't see how a logger service could be added (as independent entity).
+* The solution is not quite flexible.
 
-On the bright side, this solution is simple and efficient. It might be perfect for small apps. For better performance, use the _OnPush_ change detection strategy together with _async_ pipes and _distinctUntilChanged_ rxjs operator.
+On the bright side, this solution is simple and efficient. It might be perfect for small apps. 
+For better performance, use the _OnPush_ change detection strategy together with _async_ pipes and _distinctUntilChanged_ rxjs operator.
 
-In conclusion, I'd prefer to use well known and considered solution like NGRX or Redux but for very small apps it'd okay to use this simple one. 
 
