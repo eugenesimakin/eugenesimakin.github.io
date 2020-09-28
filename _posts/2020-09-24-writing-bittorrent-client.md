@@ -10,33 +10,23 @@ decided to build my own *something*. Specifically,
 [a bittorrent client](https://github.com/danistefanovic/build-your-own-x#build-your-own-bittorrent-client) to 
 gain a better understanding of how it works.
 
-This article is not a tutorial on writing a bittorrent (bt) client and won't give you detailed explanation of
-how bt protocol works. The article describes only my personal experience on the topic. So, if you want
-a good tutorial, or a guide on building a bt client, see the [build-your-own-x](https://github.com/danistefanovic/build-your-own-x).
-You find there a few good things, for example [this article](https://www.seanjoflynn.com/research/bittorrent.html) 
-is quite big and thorough, but [this blog post](https://blog.jse.li/posts/torrent/) is, in opposite, 
-short and straight to the point. So, please, looked it up.
+**Warning!** This blog post is not a tutorial and is my experience only. If you're looking for a guide, please, refer to
+"[Building a BitTorrent client from the ground up in Go](https://blog.jse.li/posts/torrent/)" or 
+"[Building a BitTorrent client from scratch in C#](https://www.seanjoflynn.com/research/bittorrent.html)". 
+The first one is straight to the point, the second one is, in opposite, more verbose.
 
-First things first. I had to choose a programming language for the project and had a couple things in mind -
-Kotlin and Rust. As a Java developer, I would prefer Kotlin since, it's a very comfortable tool to use at work 
-and in personal projects. It has great expressive power and is supported by Intellij IDEA 
-which gives me a good debugging toolkit. On the other hand, Rust is better for a command-line tool 
-and has interesting features, I'd like to learn. So, at first, I chose Rust but then switched back to Kotlin 
-for reasons: 1) Debugging is not handy for me, since I don't have enough experience with gdb or lldb; 
-2) Degraded productivity due to Rust's key features like borrow checker.
-
-# Journey to 99 percent
-
-*Requirements*. To keep it simple, I decided to implement very basic functionality which includes only downloading.
-In addition to that, the address of a torrent tracker should support http. The app will be a command-line 
-tool, which accepts only one torrent file. The torrent file will consist of only one file in it. 
-The Debian network installer is the best candidate for a file to download ([link](https://cdimage.debian.org/debian-cd/current/amd64/bt-cd/#indexlist)).
-
-*General description of the downloading process*. Despite the fact, that Bittorrent is decentralized protocol,
-we still need a central server (torrent tracker) to get addresses of peers in basic implementation of the protocol.
-So, first of all we request peer list (ip + port) from a bt tracker, what is known as announcing.
-In our case, this is a simple HTTP GET request. After our bt client announced itself on the tracker and got peers, 
+_Simplified description of the process_. First of all we request peer list (ip + port) from a bt tracker, 
+what is known as announcing. In our case, this is a simple HTTP GET request. 
+After our bt client announced itself on the tracker and got peers, 
 we can start connecting to peers to figure out what they have. If they have what we need, we request data.
+
+# First Attempt
+
+To keep it simple, I decided to implement very basic functionality which includes **only downloading**.
+In addition to that, the app won't support requesting peers via UDP from the torrent tracker. 
+The app will be a command-line tool, which accepts only one torrent file. 
+The torrent file will consist of only one file in it, which is the Debian network installer.
+I suppose, this is the best candidate for a file to download ([link](https://cdimage.debian.org/debian-cd/current/amd64/bt-cd/#indexlist)).
 
 *Detailed description of the process*. The application makes use of ArrayBlockingQueues to implement approach 
 "Do not communicate by sharing memory; instead, share memory by communicating", but still somewhere
@@ -56,7 +46,7 @@ Explanation behind it is pretty simple if you'll account that almost every peer 
 But, the app written in Go works fine, so I took the peers which receives that app in Go and use them in my app.
 Not ideally, but it worked.
 
-*Why 99 percent*. When I got some good peers to connect to, I fixed a few minor bugs, and the app works fine.
+When I got some good peers to connect to, I fixed a few minor bugs, and the app works fine.
 Still, I couldn't get all 100% of the file. Sometimes, it was 99.43%, sometimes - 99.14%. So, I've decided 
 to stop working on it for now, because already spent a lot of time on it.
 
