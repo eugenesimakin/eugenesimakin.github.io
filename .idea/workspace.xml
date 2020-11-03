@@ -19,7 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43e2a5f8-58ce-4d85-84ca-df268510ac62" name="Default Changelist" comment="New article - Writing a Bittorrent client" />
+    <list default="true" id="43e2a5f8-58ce-4d85-84ca-df268510ac62" name="Default Changelist" comment="New article - Writing a Bittorrent client">
+      <change afterPath="$PROJECT_DIR$/_posts/2020-10-03-gcp-load-testing.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_sass/tale/_code.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/tale/_code.scss" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +50,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../spring-framework" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../gcp/load-testing/prepare.sh" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -94,17 +100,23 @@
       <screen x="0" y="0" width="1920" height="1170" />
     </state>
     <state x="92" y="92" width="1736" height="986" key="DiffContextDialog/0.0.1920.1170@0.0.1920.1170" timestamp="1600909733178" />
-    <state x="363" y="216" key="FileChooserDialogImpl" timestamp="1601160453772">
-      <screen x="0" y="0" width="1920" height="1170" />
+    <state x="363" y="244" width="424" height="491" key="FileChooserDialogImpl" timestamp="1604438720307">
+      <screen x="0" y="27" width="1920" height="1173" />
     </state>
     <state x="363" y="216" key="FileChooserDialogImpl/0.0.1920.1170@0.0.1920.1170" timestamp="1601160453772" />
+    <state x="363" y="244" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1173@0.27.1920.1173" timestamp="1604438720307" />
+    <state x="156" y="148" width="1022" height="737" key="SettingsEditor" timestamp="1604439148275">
+      <screen x="0" y="27" width="1920" height="1173" />
+    </state>
+    <state x="156" y="148" width="1022" height="737" key="SettingsEditor/0.27.1920.1173@0.27.1920.1173" timestamp="1604439148275" />
     <state x="552" y="318" key="Vcs.Push.Dialog.v2" timestamp="1600959196603">
       <screen x="0" y="0" width="1920" height="1170" />
     </state>
     <state x="552" y="318" key="Vcs.Push.Dialog.v2/0.0.1920.1170@0.0.1920.1170" timestamp="1600959196603" />
-    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1600797705404">
-      <screen x="0" y="0" width="1920" height="1170" />
+    <state x="623" y="285" width="672" height="680" key="search.everywhere.popup" timestamp="1604434810177">
+      <screen x="0" y="27" width="1920" height="1173" />
     </state>
     <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/0.0.1920.1170@0.0.1920.1170" timestamp="1600797705404" />
+    <state x="623" y="285" width="672" height="680" key="search.everywhere.popup/0.27.1920.1173@0.27.1920.1173" timestamp="1604434810177" />
   </component>
 </project>
